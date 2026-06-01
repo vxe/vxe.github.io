@@ -9,7 +9,7 @@
 </head>
 <body>
   <header class="site-header">
-    <a class="site-title" href="{{ "/" | relURL }}">{{ site.Title }}</a>
+    <a class="site-title" href="{{ "/" | relURL }}">{{ replace site.Title "λ" "<span class=\"lam\">λ</span>" | safeHTML }}</a>
   </header>
   <main>
     {{ block "main" . }}{{ end }}

@@ -22,6 +22,40 @@ to `main`. Source lives here in `~/Documents/blog` (cron-mirrored to Dropbox).
 3. Run the security gate: `make scrub` (also runs automatically on commit).
 4. Leave it `draft: true` for the human to review.
 
+## Adding screenshots (X11 / StumpWM desktop)
+
+The agent can capture the screen and **actually see it**: shoot a PNG with
+`maim`, then `Read` the file (Read renders images). Use this to caption what is
+really on screen, not a guess. Install once: `sudo apt install -y maim slop`.
+
+Capture recipes (set `DISPLAY=:0` if unset):
+
+```bash
+maim /tmp/shot.png                                       # whole screen
+maim --window "$(xdotool getactivewindow)" /tmp/w.png    # focused window
+maim --geometry WxH+X+Y /tmp/region.png                  # exact screen rectangle
+maim --select /tmp/r.png                                 # drag a region (slop)
+```
+
+Locate a polybar widget precisely: `xdotool search --class polybar` →
+`xdotool getwindowgeometry --shell <wid>` for the bar's box, then grab a
+sub-rectangle with `--geometry` and **`Read` it to verify the crop**, tightening
+coordinates until only the intended widget is in frame. Iterate — you can see
+each attempt.
+
+**Crop to the subject — a screenshot bypasses the scrub gate.** `scrub.sh`
+scans text, not PNG pixels, so a full-bar/full-screen shot can publish a network
+interface name, IP, hostname, location/timezone, window titles, or open content
+that the gate would otherwise block. Capture only the widget/window the post is
+about; never commit a full-screen grab without eyeballing every pixel for PII.
+
+Store + link: put files in `static/img/<name>.png` (served at `/img/...`) and
+reference with markdown `![alt](/img/<name>.png)`. Rebuild and confirm the
+`<img>` is in the built page and serves 200 before handing off.
+
+If you toggle live system state to stage a shot (e.g. flipping a feature on),
+**restore it afterward** — leave the machine as you found it.
+
 ## Publishing (human-in-the-loop)
 
 - Review the draft, then: `make publish POST=content/posts/<slug>.md`
@@ -42,6 +76,10 @@ When writing posts, pre-scrub by convention:
 - private internals (RCA details, infra hostnames) → generalize or omit
 
 If the gate fires, fix the content — do not use `--no-verify`.
+
+⚠️ **The gate scans text only — images bypass it entirely.** Any screenshot is
+your responsibility to vet pixel-by-pixel for PII before committing (see
+"Adding screenshots"). Prefer tight crops of just the subject.
 
 Personal identifiers (home path, email, device serial) are **not** in the
 committed `scrub.sh` — they live in `scripts/scrub.local`, which is gitignored

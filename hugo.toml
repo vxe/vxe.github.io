@@ -1,11 +1,11 @@
 baseURL = "https://vijayedw.in/"
 languageCode = "en-us"
-title = "vijayedw // notes"
+title = "vijaλedwin"
 enableRobotsTXT = true
 
 [params]
   description = "Notes from building things — Linux, StumpWM, Emacs, and Claude investigations."
-  author = "vxe"
+  author = "Vijay Edwin"
 
 [permalinks]
   posts = "/:year/:month/:slug/"

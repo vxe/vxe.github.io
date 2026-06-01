@@ -1,5 +1,6 @@
 baseURL = "https://vxe.github.io/"
 languageCode = "en-us"
+timeZone = "Asia/Singapore"
 title = "vijaλedwin"
 enableRobotsTXT = true
 

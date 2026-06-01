@@ -56,6 +56,32 @@ reference with markdown `![alt](/img/<name>.png)`. Rebuild and confirm the
 If you toggle live system state to stage a shot (e.g. flipping a feature on),
 **restore it afterward** — leave the machine as you found it.
 
+### Capturing a StumpWM menu / popup (override-redirect windows)
+
+`maim --window` and `--geometry` **miss** StumpWM menus (e.g. `select-from-menu`)
+— they're override-redirect windows the WM paints itself, and they grab the
+keyboard, so per-window capture and focus-stealing both fail. What works:
+
+1. **Trigger it** the same way the UI does. Clickable polybar labels write a Lisp
+   form to the eval bridge, so reproduce that: `echo '(some-command)' >
+   /tmp/stumpwm-eval-input` (the watcher polls every ~2s).
+2. **Full-screen `maim`** — the centered menu is part of the screen. The menu
+   *blocks* (interactive), so it stays up; no timing race.
+3. **Crop with ImageMagick** (installed): `convert full.png -crop WxH+X+Y +repage
+   out.png`, then `Read` and adjust — iterate on the saved PNG, no re-trigger
+   needed. (`maim --geometry` is unreliable here: tiling/overlap moves things.)
+4. **Abort cleanly**: `xdotool key Escape` then `ctrl+g`. Arrow-key *navigation*
+   via xdotool is unreliable (synthetic keys often don't reach the grab) — don't
+   rely on it.
+5. **Back up + restore** any state the menu would change (e.g. the timezone
+   file), and confirm it's unchanged after.
+
+Useful `select-from-menu` facts: it supports **type-to-filter** (default
+`filter-pred`, case-sensitive — type `Los`, not `los`) to narrow a long list for
+a clean shot, and takes an `initial-selection` index as its 4th arg. Use the eval
+bridge to compute things (e.g. `(position "America/Los_Angeles" (list-…) …)`),
+reading the result from `/tmp/stumpwm-eval-output`.
+
 ## Publishing (human-in-the-loop)
 
 - Review the draft, then: `make publish POST=content/posts/<slug>.md`

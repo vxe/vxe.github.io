@@ -1,6 +1,6 @@
 ---
 title: "[stumpwm] A clickable \"stay awake\" toggle for Polybar"
-date: 2026-06-01
+date: 2026-06-01T09:00:00
 draft: false
 tags: [linux, polybar, stumpwm]
 summary: "A coffee-cup button that blocks both systemd and X sleep — click on, click off."

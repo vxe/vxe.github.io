@@ -30,6 +30,8 @@ code{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace}
 blockquote{border-left:3px solid var(--accent);margin:1rem 0;padding:.2rem 1rem;color:var(--muted)}
 table{border-collapse:collapse;width:100%;margin:1rem 0}
 th,td{border:1px solid var(--border);padding:.4rem .6rem;text-align:left}
+.comments{margin-top:3rem;border-top:1px solid var(--border);padding-top:1.5rem}
+.comments h2{font-size:1.1rem;margin-bottom:1rem}
 .site-footer{color:var(--muted);font-size:.85rem;margin:3rem auto 2rem;border-top:1px solid var(--border);padding-top:1rem}
 img{
   max-width:100%;

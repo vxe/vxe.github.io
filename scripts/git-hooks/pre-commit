@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Pre-commit security gate. Activated by `make install-hooks`
+# (sets core.hooksPath to this directory). Blocks commits with secrets/PII.
+exec "$(git rev-parse --show-toplevel)/scripts/scrub.sh"

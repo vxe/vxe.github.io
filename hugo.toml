@@ -1,0 +1,19 @@
+baseURL = "https://vijayedw.in/"
+languageCode = "en-us"
+title = "vijayedw // notes"
+enableRobotsTXT = true
+
+[params]
+  description = "Notes from building things — Linux, StumpWM, Emacs, and Claude investigations."
+  author = "vxe"
+
+[permalinks]
+  posts = "/:year/:month/:slug/"
+
+[taxonomies]
+  tag = "tags"
+
+[markup.highlight]
+  noClasses = true          # inline styles → no extra syntax CSS to ship
+  style = "github-dark"
+  tabWidth = 2

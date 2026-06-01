@@ -1,0 +1,6 @@
+# Copy this file to scrub.local (which is gitignored) and fill in your real
+# identifiers. scrub.sh loads it so the committed gate contains no PII.
+# Format: Display name=ERE-pattern   (one per line; # = comment)
+Home path=/home/YOURUSERNAME
+Personal email=you@example\.com
+Device serial=YOURSERIAL

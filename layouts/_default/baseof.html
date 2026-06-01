@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
   {{ with .Description | default site.Params.description }}<meta name="description" content="{{ . }}">{{ end }}
+  {{ template "_internal/opengraph.html" . }}
+  {{ template "_internal/twitter_cards.html" . }}
   <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
 </head>
 <body>

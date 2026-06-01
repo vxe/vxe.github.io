@@ -1,0 +1,20 @@
+{{/* Share + discuss links — plain intent/search URLs, no JS, no tracking.
+     Build full URL + safeURL so Hugo's href-context escaper doesn't double-encode
+     the already-encoded querify output. */}}
+{{ $u := .Permalink }}
+{{ $t := .Title }}
+<nav class="post-share">
+  <span class="share-label">Share</span>
+  <a href="{{ printf "https://twitter.com/intent/tweet?%s" (querify "text" $t "url" $u) | safeURL }}"
+     target="_blank" rel="noopener">X</a>
+  <a href="{{ printf "https://www.reddit.com/submit?%s" (querify "url" $u "title" $t) | safeURL }}"
+     target="_blank" rel="noopener">Reddit</a>
+  <a href="{{ printf "https://news.ycombinator.com/submitlink?%s" (querify "u" $u "t" $t) | safeURL }}"
+     target="_blank" rel="noopener">Hacker News</a>
+  <span class="share-sep">·</span>
+  <span class="share-label">Discuss</span>
+  <a href="{{ printf "https://hn.algolia.com/?%s" (querify "query" $u "type" "story") | safeURL }}"
+     target="_blank" rel="noopener">on HN</a>
+  <a href="{{ printf "https://www.reddit.com/search/?%s" (querify "q" (printf "url:%s" $u)) | safeURL }}"
+     target="_blank" rel="noopener">on Reddit</a>
+</nav>

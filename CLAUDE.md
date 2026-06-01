@@ -1,7 +1,7 @@
 # Blog — Claude instructions
 
 Hugo blog for short, practical write-ups of investigations (Linux, StumpWM,
-Emacs, Claude work). Deploys to GitHub Pages at **https://vijayedw.in/** on push
+Emacs, Claude work). Deploys to GitHub Pages at **https://vxe.github.io/** on push
 to `main`. Source lives here in `~/Documents/blog` (cron-mirrored to Dropbox).
 
 ## How to add a post ("blog this")
@@ -100,5 +100,9 @@ so the gate itself never publishes PII. Set it up once from
 
 - `content/posts/` — all posts (`draft:` flag controls visibility)
 - `layouts/` — self-contained minimal theme (no external theme dependency)
-- `static/CNAME` — custom domain, survives Hugo rebuilds
 - `.github/workflows/hugo.yml` — build + deploy to Pages
+
+Served free at `https://vxe.github.io/` (repo is named `vxe.github.io`). To use a
+custom domain later: add `static/CNAME` with the domain, set `baseURL` in
+`hugo.toml` to match, and point the domain's DNS at GitHub Pages
+(`185.199.108–111.153`).
